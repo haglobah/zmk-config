@@ -92,7 +92,6 @@ ZMK_COMBO(switch_lang, &sl LANG, 21 23, ALL)
         global-quick-tap-ms = <100>; \
         bindings = <HOLD>, <TAP>; \
         hold-trigger-key-positions = <TRIGGER_POS>; \
-        hold-trigger-on-release; \
     )
 MAKE_HRM(lhm, &kp, &kp, KEYS_R THUMBS)  // left-hand HRMs
 MAKE_HRM(rhm, &kp, &kp, KEYS_L THUMBS)  // right-hand HRMs
