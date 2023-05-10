@@ -44,7 +44,7 @@ ZMK_UNICODE_SINGLE( sym_lozenge,  N2, N5,  C,  A)
     macros {
         ZMK_MACRO(scope, wait-ms = <1>; tap-ms = <1>; bindings = <&kp COLON &kp COLON>;)
         ZMK_MACRO(lambda, wait-ms = <1>; tap-ms = <1>; bindings = <&kp L &kp A &kp M &kp B &kp D &kp A>;)
-        ZMK_MACRO(term, wait-ms = <1>; tap-ms = <1>; bindings = <&kp LGUI &kp T &kp E &kp R &kp RET>;)
+        ZMK_MACRO(term, wait-ms = <1>; tap-ms = <1>; bindings = <&kp LGUI &kp T &kp E &kp R &kp M &kp RET>;)
     };
 };
 
@@ -143,7 +143,7 @@ ZMK_LAYER(num_layer,
 
 ZMK_LAYER(nav_layer,
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-    &kp MEH(T)     ___           ___           ___           &bt BT_CLR     &bt BT_PRV    &bt BT_NXT    ___           ___           &kp MEH(T)
+    &term          &kp LGUI(TAB) &kp LGUI(CARET)   ___       &bt BT_CLR     &bt BT_PRV    &bt BT_NXT    ___           ___           &term
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     &sk LALT       &sk LGUI      &sk LSHFT     &sk LCTRL     ___            ___           &kp LEFT      &kp DOWN      &kp UP        &kp RIGHT
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
