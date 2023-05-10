@@ -11,6 +11,7 @@
 #define HOST_OS 1
 #include "../zmk-nodefree-config/helper.h"
 #include "../zmk-nodefree-config/international_chars/greek.dtsi"
+#include "../zmk-nodefree-config/keypos_def/keypos_36keys.h"
 #include "../zmk-nodefree-config/international_chars/german.dtsi"
 
 &sk {
