@@ -98,13 +98,13 @@ MAKE_HRM(lhm, &kp, &kp, KEYS_R THUMBS)  // left-hand HRMs
 MAKE_HRM(rhm, &kp, &kp, KEYS_L THUMBS)  // right-hand HRMs
 
 
-ZMK_BEHAVIOR(lt, hold_tap,
-    flavor = "balanced";
-    tapping-term-ms = <200>;
-    quick-tap-ms = <200>;
-    global-quick-tap-ms = <100>;
-    bindings = <&mo>, <&kp>;
-)
+// ZMK_BEHAVIOR(lt, hold_tap,
+//     flavor = "balanced";
+//     tapping-term-ms = <200>;
+//     quick-tap-ms = <200>;
+//     global-quick-tap-ms = <100>;
+//     bindings = <&mo>, <&kp>;
+// )
 
 ZMK_LAYER(base_layer,
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
