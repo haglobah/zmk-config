@@ -1,0 +1,190 @@
+/*
+ * Copyright (c) 2021 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+
+#define HOST_OS 1
+#include "../zmk-nodefree-config/helper.h"
+#include "../zmk-nodefree-config/international_chars/greek.dtsi"
+#include "../zmk-nodefree-config/international_chars/german.dtsi"
+
+&sk {
+    release-after-ms = <750>;
+    quick-release;
+};
+
+&caps_word {
+    continue-list = <UNDERSCORE MINUS BSPC>;
+};
+
+#define BASE_L  0
+#define SYM_L   1
+#define NUM_L   2
+#define NAV_L   3
+#define LANG_L  4
+
+#define CUT   LG(X)
+#define COPY  LG(C)
+#define PASTE LG(V)
+
+#define MEH(KEY) LS(LC(LA(LG(KEY))))
+
+ZMK_UNICODE_SINGLE( sym_lozenge,  N2, N5,  C,  A)
+
+/ {
+    macros {
+        ZMK_MACRO(scope, wait-ms = <1>; tap-ms = <1>; bindings = <&kp COLON &kp COLON>;)
+        ZMK_MACRO(lambda, wait-ms = <1>; tap-ms = <1>; bindings = <&kp L &kp A &kp M &kp B &kp D &kp A>;)
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        #define COMBO(NAME, BINDINGS, KEYPOS, TIMEOUT) \
+              combo_##NAME { \
+                timeout-ms = <TIMEOUT>; \
+                bindings = <BINDINGS>; \
+                key-positions = <KEYPOS>; \
+              };
+
+        /*                KEY POSITIONS
+
+          ╭────────────────────╮ ╭────────────────────╮
+          │  0   1   2   3   4 │ │  5   6   7   8   9 │
+          │ 10  11  12  13  14 │ │ 15  16  17  18  19 │
+          │ 20  21  22  23  24 │ │ 25  26  27  28  29 │
+          ╰───────╮ 30  31  32 │ │ 33  34  35 ╭───────╯
+                  ╰────────────╯ ╰────────────╯        */
+
+        #define COMBO_TIME 20
+
+        COMBO(caps_word_left, &caps_word, 13 14, COMBO_TIME)
+        COMBO(caps_word_right, &caps_word, 15 16, COMBO_TIME)
+
+        COMBO(grave, &kp GRAVE, 1 2, COMBO_TIME)
+        COMBO(scope, &scope, 2 3, COMBO_TIME)
+        COMBO(hash, &kp HASH, 6 7, COMBO_TIME)
+        COMBO(semicolon, &kp SEMI, 7 8, COMBO_TIME)
+        COMBO(equal, &kp EQUAL, 21 22, COMBO_TIME)
+        COMBO(colon, &kp COLON, 27 28, COMBO_TIME)
+
+        COMBO(lpar, &kp LPAR, 11 12, COMBO_TIME)
+        COMBO(rpar, &kp RPAR, 17 18, COMBO_TIME)
+        COMBO(lbkt, &kp LBKT, 12 13, COMBO_TIME)
+        COMBO(rbkt, &kp RBKT, 16 17, COMBO_TIME)
+        COMBO(lbrc, &kp LBRC, 11 13, COMBO_TIME)
+        COMBO(rbrc, &kp RBRC, 16 18, COMBO_TIME)
+
+        COMBO(minus, &kp MINUS, 26 27, COMBO_TIME)
+        COMBO(underscore, &kp UNDER, 22 23, COMBO_TIME)
+        
+        COMBO(switch_lang, &sl LANG_L, 21 23, COMBO_TIME)
+    };
+
+    behaviors {
+        lhm: left_hand_positional_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LEFT_POSITIONAL_HOLD_TAP";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <150>;
+            quick-tap-ms = <0>;
+            global-quick-tap-ms = <100>;
+            bindings = <&kp>, <&kp>;
+            // hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 30 31 32 33 34 35>;
+            // hold-trigger-key-positions = <5 6 7 8 9 10 11 12 13 15 16 17 18 19 25 26 27 28 29 30 31 32 33 34 35>;
+        };
+
+        rhm: right_hand_positional_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "RIGHT_POSITIONAL_HOLD_TAP";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <150>;
+            quick-tap-ms = <0>;
+            global-quick-tap-ms = <100>;
+            bindings = <&kp>, <&kp>;
+            // hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 30 31 32 33 34 35>;
+            // hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 16 17 18 19 20 21 22 23 24 30 31 32 33 34 35>;
+        };
+
+        base_lt: base_layer_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "BASE_LAYER_HOLD_TAP";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            global-quick-tap-ms = <100>;
+            bindings = <&mo>, <&kp>;
+        };
+
+        // rpt_lt: repeat_hold_tap {
+        //     compatible = "zmk,behavior-hold-tap";
+        //     label = "REPEAT_HOLD_TAP";
+        //     #binding-cells = <2>;
+        //     flavor = "tap-preferred";
+        //     tapping-term-ms = <200>;
+        //     quick-tap-ms = <200>;
+        //     global-quick-tap;
+        //     bindings = <&mo>, <&key_repeat>;
+        // };
+    };
+
+	keymap {
+		compatible = "zmk,keymap";
+
+		base_layer {
+			bindings = <
+                   &kp Q        &kp W         &kp F              &kp P              &kp B              &kp J              &kp L               &kp U                 &kp Y         &kp APOS
+                   &lhm LALT A  &lhm LGUI R   &lhm LSHFT S       &lhm LCTRL T       &kp G              &kp M              &rhm LCTRL N        &rhm RSHFT E          &rhm LGUI I   &rhm RALT O
+                   &kp Z        &kp X         &kp C              &kp D              &kp V              &kp K              &kp H               &kp COMMA             &kp DOT       &kp FSLH
+				 /*&            &*/           &base_lt NAV_L TAB &base_lt SYM_L BSPC &base_lt NUM_L DEL &base_lt NUM_L RET &base_lt SYM_L SPC &base_lt NAV_L ESC  /*&             &*/
+			>;
+		};
+
+		sym_layer {
+			bindings = <
+                   &kp APOS     &de_ae        &de_oe        &de_ue             &kp AMPS           &scope              &sym_lozenge     &kp LBRC       &kp RBRC      &kp UNDER
+                   &kp EXCL     &kp MINUS     &kp PLUS      &kp EQUAL          &kp PIPE           &kp PRCNT           &kp HASH         &kp LPAR       &kp RPAR      &kp AT
+                   &kp CARET    &kp FSLH      &kp STAR      &kp BSLH           &kp TILDE          &lambda             &kp DLLR         &kp LBKT       &kp RBKT      &kp QMARK
+				 /*&            &*/           &trans        &trans             &trans             &trans              &trans           &trans       /*&             &*/
+			>;
+		};
+
+		num_layer {
+			bindings = <
+                   &kp UNDER    &kp N6        &kp N5        &kp N4             &kp PLUS           &kp STAR            &kp F4           &kp F5         &kp F6        &kp F10
+                   &kp DOT      &kp N3        &kp N2        &kp N1             &kp MINUS          &kp LSHFT           &kp F1           &kp F2         &kp F3        &kp F11
+                   &kp COMMA    &kp N9        &kp N8        &kp N7             &kp EQUAL          &kp COLON           &kp F7           &kp F8         &kp F9        &kp F12
+				 /*&            &*/           &trans        &trans             &kp N0             &kp N0              &trans           &trans       /*&             &*/
+			>;
+		};
+
+		nav_layer {
+			bindings = <
+                   &kp MEH(T)   &trans        &trans        &trans             &bt BT_CLR         &bt BT_PRV          &bt BT_NXT       &trans         &trans        &kp MEH(T)
+                   &sk LALT     &sk LGUI      &sk LSHFT     &sk LCTRL          &trans             &trans              &kp LEFT         &kp DOWN       &kp UP        &kp RIGHT
+                   &trans       &kp CUT       &kp COPY      &kp PASTE          &trans             &trans              &kp HOME         &kp K_PREV     &kp K_NEXT    &kp END
+				 /*&            &*/           &trans        &trans             &trans             &trans              &trans           &trans       /*&             &*/
+			>;
+		};
+
+		lang_layer {
+			bindings = <
+                    &el_sigma     &el_omega     &el_phi       &el_pi        &el_beta        &el_epsilon   &el_lambda    &el_upsilon   &el_psi       &de_eszett   
+                // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─┤
+                    &el_alpha     &el_rho       &trans        &el_tau       &el_gamma       &el_mu        &el_nu        &trans        &el_iota      &el_omikron  
+                // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─┤
+                    &el_zeta      &el_xi        &el_chi       &el_delta     &el_theta       &el_kappa     &el_eta       &de_ae        &de_oe        &de_ue       
+                // ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┴───────────────────────────╯─┤
+                                                &trans        &trans        &trans          &trans        &trans        &trans                                   
+			>;
+		};
+	};
+};
