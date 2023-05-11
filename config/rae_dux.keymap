@@ -45,7 +45,7 @@ ZMK_UNICODE_SINGLE( sym_lozenge,  N2, N5,  C,  A)
     macros {
         ZMK_MACRO(scope, wait-ms = <1>; tap-ms = <1>; bindings = <&kp COLON &kp COLON>;)
         ZMK_MACRO(lambda, wait-ms = <1>; tap-ms = <1>; bindings = <&kp L &kp A &kp M &kp B &kp D &kp A>;)
-        ZMK_MACRO(term, wait-ms = <1>; tap-ms = <1>; bindings = <&kp LGUI &kp T &kp E &kp R &kp M &kp RET>;)
+        ZMK_MACRO(term, wait-ms = <30>; tap-ms = <30>; bindings = <&kp LGUI &kp T &kp E &kp R &kp M &kp RET>;)
     };
 };
 
@@ -87,7 +87,7 @@ ZMK_COMBO(switch_lang, &sl LANG, 21 23, ALL)
 #define MAKE_HRM(NAME, HOLD, TAP, TRIGGER_POS) \
     ZMK_BEHAVIOR(NAME, hold_tap, \
         flavor = "balanced"; \
-        tapping-term-ms = <280>; \
+        tapping-term-ms = <230>; \
         quick-tap-ms = <150>; \
         global-quick-tap-ms = <100>; \
         bindings = <HOLD>, <TAP>; \
@@ -137,7 +137,7 @@ ZMK_LAYER(num_layer,
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     &kp COMMA      &kp N9        &kp N8        &kp N7        &kp EQUAL      &kp COLON     &kp F7        &kp F8         &kp F9        &kp F12
 // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-                                 ___           ___           ___            ___           ___           ___
+                                 ___           ___           &kp N0         &kp N0        ___           ___
 //                             ╰─────────────┴─────────────┴─────────────╯╰─────────────┴─────────────┴─────────────╯
 )
 
