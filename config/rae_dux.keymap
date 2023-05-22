@@ -119,11 +119,11 @@ ZMK_LAYER(base_layer,
 
 ZMK_LAYER(sym_layer,
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-     &kp APOS      &de_ae        &de_oe        &de_ue        &kp AMPS       &scope        &sym_lozenge  &kp LBRC      &kp RBRC      &kp UNDER
+     &kp APOS      &de_ae        &de_oe        &de_ue        &kp HASH       &scope        &sym_lozenge  &kp LBKT      &kp RBKT      &kp UNDER
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-     &kp EXCL      &kp MINUS     &kp PLUS      &kp EQUAL     &kp PIPE       &kp PRCNT     &kp HASH      &kp LPAR      &kp RPAR      &kp AT
+     &kp EXCL      &kp MINUS     &kp PLUS      &kp EQUAL     &kp PIPE       &kp AMPS      &kp PRCNT     &kp LBRC      &kp RBRC      &kp AT
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-     &kp CARET     &kp FSLH      &kp STAR      &kp BSLH      &kp TILDE      &lambda       &kp DLLR      &kp LBKT      &kp RBKT      &kp QMARK
+     &kp CARET     &kp FSLH      &kp STAR      &kp BSLH      &kp TILDE      &lambda       &kp DLLR      &kp LT        &kp GT        &kp FSLH
 // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
                                  ___           ___           ___            ___           ___           ___
 //                             ╰─────────────┴─────────────┴─────────────╯╰─────────────┴─────────────┴─────────────╯
