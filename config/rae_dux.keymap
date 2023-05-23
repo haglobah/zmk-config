@@ -80,7 +80,6 @@ ZMK_COMBO(rpar, &kp RPAR, 17 18, ALL)
 ZMK_COMBO(minus, &kp MINUS, 26 27, ALL)
 ZMK_COMBO(colon, &kp COLON, 27 28, ALL)
 
-ZMK_COMBO(tab, &kp TAB, 10 11, ALL)
 ZMK_COMBO(switch_lang, &sl LANG, 21 23, ALL)
 
 
@@ -113,7 +112,7 @@ ZMK_LAYER(base_layer,
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
      &kp Z         &kp X         &kp C         &kp D         &kp V          &kp K         &kp H         &kp COMMA     &kp DOT       &kp FSLH
 // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-                                 &kp LSHFT     &lt SYM BSPC  &lt NUM DEL    &lt NUM RET   &lt SYM SPC   &lt NAV ESC
+                                 &lt NAV TAB   &lt SYM BSPC  &lt NUM DEL    &lt NUM RET   &lt SYM SPC   &lt NAV ESC
 //                             ╰─────────────┴─────────────┴─────────────╯╰─────────────┴─────────────┴─────────────╯
 )
 
@@ -143,7 +142,7 @@ ZMK_LAYER(num_layer,
 
 ZMK_LAYER(nav_layer,
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-    &term          &kp LG(TAB)   &kp LG(GRAVE)   ___       &bt BT_CLR     &bt BT_PRV    &bt BT_NXT    ___           ___           &term
+    &term          &kp LG(TAB)   &kp LG(GRAVE)   ___         &bt BT_CLR     &bt BT_PRV    &bt BT_NXT    ___           ___           &term
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     &sk LALT       &sk LGUI      &sk LSHFT     &sk LCTRL     ___            ___           &kp LEFT      &kp DOWN      &kp UP        &kp RIGHT
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
