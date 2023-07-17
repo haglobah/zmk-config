@@ -1,7 +1,7 @@
 * rae-dux
 Endgame wireless split ergo keeb with low-profile switches and keycaps
 
-Built with the help of [this guide](https://www.tzcl.me/blog/rae-dux).
+Built with the help of [this guide](https://www.tzcl.me/posts/rae-dux).
 
 Layout heavily inspired by 
 + https://github.com/tzcl/zmk-config
