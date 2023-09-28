@@ -12,10 +12,6 @@ while [[ $# -gt 0 ]]; do
             RUNWITH_DOCKER="false"
             ;;
 
-        -m|--multithread)
-            MULTITHREAD="true"
-            ;;
-
         -c|--clear-cache)
             CLEAR_CACHE="true"
             ;;
@@ -77,7 +73,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Set defaults
-[[ -z $ZEPHYR_VERSION ]] && ZEPHYR_VERSION="3.2"
+[[ -z $ZEPHYR_VERSION ]] && ZEPHYR_VERSION="3.0"
 [[ -z $RUNWITH_DOCKER ]] && RUNWITH_DOCKER="true"
 
 [[ -z $OUTPUT_DIR ]] && OUTPUT_DIR="$WINHOME/Downloads"
@@ -132,8 +128,7 @@ fi
 if [[ $RUNWITH_DOCKER = true ]]
 then
     echo "Build mode: docker"
-    # DOCKER_CMD="$DOCKER_BIN run --name zmk-$ZEPHYR_VERSION --rm \
-    DOCKER_CMD="$DOCKER_BIN run --rm \
+    DOCKER_CMD="$DOCKER_BIN run --name zmk-$ZEPHYR_VERSION --rm \
         --mount type=bind,source=$HOST_ZMK_DIR,target=$DOCKER_ZMK_DIR \
         --mount type=bind,source=$HOST_CONFIG_DIR,target=$DOCKER_CONFIG_DIR,readonly \
         --mount type=volume,source=zmk-root-user-$ZEPHYR_VERSION,target=/root \
@@ -170,15 +165,15 @@ fi
 
 # usage: compile_board board
 compile_board () {
+    echo -en "\n$(tput setaf 2)Building $1... $(tput sgr0)"
     BUILD_DIR="${1}_$SUFFIX"
     LOGFILE="$LOG_DIR/zmk_build_$1.log"
-    [[ $MULTITHREAD = "true" ]] || echo -en "\n$(tput setaf 2)Building $1... $(tput sgr0)"
-    [[ $MULTITHREAD = "true" ]] && echo -e "$(tput setaf 2)Building $1... $(tput sgr0)"
     $DOCKER_PREFIX west build -d "build/$BUILD_DIR" -b $1 $WEST_OPTS \
         -- -DZMK_CONFIG="$CONFIG_DIR" -Wno-dev > "$LOGFILE" 2>&1
     if [[ $? -eq 0 ]]
     then
-        [[ $MULTITHREAD = "true" ]] || echo "$(tput setaf 2)done$(tput sgr0)"
+        # echo "$(tput setaf 4)Success: $1 done$(tput sgr0)"
+        echo "$(tput setaf 2)done$(tput sgr0)"
         echo "Build log saved to \"$LOGFILE\"."
         if [[ -f $HOST_ZMK_DIR/app/build/$BUILD_DIR/zephyr/zmk.uf2 ]]
         then
@@ -197,27 +192,7 @@ compile_board () {
 }
 
 cd "$HOST_ZMK_DIR/app"
-if [[ $MULTITHREAD = "true" ]]; then
-    i=1
-    for board in $(echo $BOARDS | sed 's/,/ /g')
-    do
-        compile_board $board &
-        eval "T${i}=\${!}"
-        eval "B${i}=\$board"  # Store the board name in a corresponding variable
-        ((i++))
-    done
-
-    echo "Starting $(($i - 1)) background threads:"
-    for ((x=1; x<i; x++))
-    do
-        pid="T$x"
-        wait "${!pid}"
-        board="B$x"  # Retrieve the board name from the corresponding variable
-        echo -e "$(tput setaf 3)Thread $x with PID ${!pid} has finished: ${!board}$(tput sgr0)"
-    done
-else
-    for board in $(echo $BOARDS | sed 's/,/ /g')
-    do
-        compile_board $board
-    done
-fi
+for board in $(echo $BOARDS | sed 's/,/ /g')
+do
+    compile_board $board
+done
